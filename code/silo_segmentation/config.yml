@@ -1,0 +1,10 @@
+config : 
+  CSV_FILE = "/content/drive/MyDrive/mckinsey_musketeers/Data/ai_ready/silo_only.csv" 
+  DATA_DIR = "/content/drive/MyDrive/mckinsey_musketeers/Data/ai_ready"
+  DEVICE = "cuda"
+  EPOCHS = 10
+  LR = 0.006
+  BATCH_SIZE = 16
+  IMG_SIZE = 256
+  ENCODER = "timm-efficientnet-b0"
+  WEIGHTS = "imagenet"
