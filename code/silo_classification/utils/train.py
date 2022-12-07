@@ -20,15 +20,15 @@ def train_step(model,
                optimizer,
                device,):
 
-"""
-  Trains a PyTorch model for a single epoch.
+  """
+    Trains a PyTorch model for a single epoch.
 
-  Parameters:
-  - model: A PyTorch model to be trained.
-  - dataloader: A DataLoader instance for the model to be trained on.
-  - loss_fn: A PyTorch loss function to minimize.
-  - optimizer: A PyTorch optimizer to help minimize the loss function.
-  - device: A target device to compute on (e.g. "cuda" or "cpu").
+    Parameters:
+    - model: A PyTorch model to be trained.
+    - dataloader: A DataLoader instance for the model to be trained on.
+    - loss_fn: A PyTorch loss function to minimize.
+    - optimizer: A PyTorch optimizer to help minimize the loss function.
+    - device: A target device to compute on (e.g. "cuda" or "cpu").
 
   """
   
@@ -123,7 +123,7 @@ def train(model,
     - epochs: An integer indicating how many epochs to train for.
     - device: A target device to compute on (e.g. "cuda" or "cpu").
   """
-  
+
   train_loss_ls = []
   test_loss_ls = []
 
