@@ -67,17 +67,17 @@ def test_step(model,
               loss_fn,
               device):
 
-"""
-  Test a PyTorch model after a training epoch.
+  """
+    Test a PyTorch model after a training epoch.
 
-  Parameters:
-  - model: A PyTorch model to be trained.
-  - dataloader: A DataLoader instance for the model to be trained on.
-  - loss_fn: A PyTorch loss function to minimize.
-  - device: A target device to compute on (e.g. "cuda" or "cpu").
+    Parameters:
+    - model: A PyTorch model to be trained.
+    - dataloader: A DataLoader instance for the model to be trained on.
+    - loss_fn: A PyTorch loss function to minimize.
+    - device: A target device to compute on (e.g. "cuda" or "cpu").
 
   """
-  
+    
   model.eval()
 
   epoch_loss = 0
