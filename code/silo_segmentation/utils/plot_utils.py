@@ -5,7 +5,10 @@ from keras import backend as K
 
 
 def show_image(image,mask,pred_image = None):
-    
+    """
+    This function is used to plot the image, the ground truth mask and the prediction mask
+    side-by-side. 
+    """
     if pred_image == None:
         
         f, (ax1, ax2) = plt.subplots(1, 2, figsize=(10,5))
@@ -30,7 +33,10 @@ def show_image(image,mask,pred_image = None):
         ax3.imshow(pred_image.permute(1,2,0).squeeze(),cmap = 'gray')
 
 
-def dice_coef(y_true, y_pred, smooth=100):        
+def dice_coef(y_true, y_pred, smooth=100):    
+    """ 
+    Util to calculate the Dice Coefficient of two masks. 
+    """    
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)

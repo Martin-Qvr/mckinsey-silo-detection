@@ -3,7 +3,9 @@ from tqdm import tqdm
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 def train_fn(dataloader, model, optimizer):
-
+  """ 
+  Train function to feed in the pipeline.
+  """
   model.train() # Turn on dropout, batchnorm etc.
 
   total_loss = 0
@@ -26,7 +28,9 @@ def train_fn(dataloader, model, optimizer):
 
 
 def eval_fn(dataloader, model):
-
+  """ 
+  Validation function to feed in the training pipeline.
+  """
   model.eval() # Turn OFF dropout, batchnorm etc.
 
   total_loss = 0

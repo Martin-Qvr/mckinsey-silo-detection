@@ -10,7 +10,9 @@ DATA_DIR = "../ai_ready"
 
 class SegmentationDataset(Dataset):
   """ 
-  This class is used 
+  This class is used to create a custome Dataset in pytorch. 
+  It retrieves the images and masks from the folders and converts them to tensors. 
+
   """
   def __init__(self, df):
     self.df = df
