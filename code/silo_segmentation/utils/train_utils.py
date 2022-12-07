@@ -1,3 +1,6 @@
+from tqdm import tqdm
+
+DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 def train_fn(dataloader, model, optimizer):
 

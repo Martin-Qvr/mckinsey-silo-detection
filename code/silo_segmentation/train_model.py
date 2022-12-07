@@ -90,6 +90,9 @@ def train_model(test_size: float, model_name: str):
 
 
 def plot_performance(idx, df):
+    """ 
+    This function computes and plots the Dice Score of the model for one image and its predicted mask again.
+    """
     model =SegmentationModel()
     model.load_state_dict(torch.load('saved_models/second_model.pt'))
 
@@ -118,9 +121,9 @@ def plot_performance(idx, df):
     return dice_coef
 
 
-def make_predictions(idx, df):
+def make_predictions(idx: int, df: pd.DataFrame, path: str):
     """ 
-    This function is used to make predictions on a dataset of images 
+    This function is used to generate the final predictions file on a dataset of images 
     """
 
     model =SegmentationModel()
@@ -137,5 +140,5 @@ def make_predictions(idx, df):
         pred_mask = torch.sigmoid(logits_mask)
         pred_mask = (pred_mask > 0.5) * 1
         plt.imshow(pred_mask.detach().cpu().squeeze(0).permute(1,2,0).squeeze(),cmap = 'gray')
-        plt.savefig(df.loc[i, "filename"])
+        plt.savefig(path + "/" + df.loc[i, "filename"])
     
