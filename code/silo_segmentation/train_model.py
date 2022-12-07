@@ -140,5 +140,5 @@ def make_predictions(idx: int, df: pd.DataFrame, path: str):
         pred_mask = torch.sigmoid(logits_mask)
         pred_mask = (pred_mask > 0.5) * 1
         plt.imshow(pred_mask.detach().cpu().squeeze(0).permute(1,2,0).squeeze(),cmap = 'gray')
-        plt.savefig(path + "/" + df.loc[i, "filename"])
+        cv2.imwrite(f"/Images/{df.loc[i, 'filename']}", pred_mask.detach().cpu().squeeze(0).permute(1,2,0).squeeze().numpy() * 255)
     
