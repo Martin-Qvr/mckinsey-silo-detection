@@ -1,9 +1,13 @@
+"""
+Contains vision transformer class
+"""
 import torch 
 from torch import nn
 patch_size = 14
 
 class ViT(nn.Module):
-    """Creates a Vision Transformer architecture with ViT-Base hyperparameters by default."""
+    """Creates a Vision Transformer architecture with ViT-Base hyperparameters by default.
+    """
     # 2. Initialize the class with hyperparameters from Table 1 and Table 3
     def __init__(self,
                  img_size:int=252, # Training resolution from Table 3 in ViT paper
@@ -88,12 +92,13 @@ class ViT(nn.Module):
         return x
 
 class PatchEmbedding(nn.Module):
-    """Turns a 2D input image into a 1D sequence learnable embedding vector.
+    """
+        Turns a 2D input image into a 1D sequence learnable embedding vector.
     
-    Args:
-        in_channels (int): Number of color channels for the input images. Defaults to 3.
-        patch_size (int): Size of patches to convert input image into. Defaults to 16.
-        embedding_dim (int): Size of embedding to turn image into. Defaults to 768.
+        Parameters:
+        - in_channels (int): Number of color channels for the input images. Defaults to 3.
+        - patch_size (int): Size of patches to convert input image into. Defaults to 16.
+        - embedding_dim (int): Size of embedding to turn image into. Defaults to 768.
     """ 
     # 2. Initialize the class with appropriate variables
     def __init__(self, 

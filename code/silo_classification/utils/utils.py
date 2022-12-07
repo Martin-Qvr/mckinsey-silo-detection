@@ -5,6 +5,13 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 def load_saved_model(model_path, model_architecture):
+  """
+    Load a saved model
+
+    Parameters:
+    - model_path (str): Path to saved model
+    - model_architecture (nn.module): architecture of the saved model
+  """
   device = 'cuda' if torch.cuda.is_available() else 'cpu'
   MODEL_SAVE_PATH = Path(model_path)
   loaded_model = model_architecture()
@@ -15,8 +22,9 @@ def load_saved_model(model_path, model_architecture):
 
 
 def plot_loss_curves(results):
-    """Plots training curves of a results dictionary.
-    Args:
+    """
+    Plots training curves of a results dictionary.
+    Parameters:
         results (dict): dictionary containing list of values, e.g.
             {"train_loss": [...],
              "train_acc": [...],
@@ -55,18 +63,16 @@ def plot_loss_curves(results):
 def save_model(model: torch.nn.Module,
                target_dir: str,
                model_name: str):
-  """Saves a PyTorch model to a target directory.
+  """
+    Saves a PyTorch model to a target directory.
 
-  Args:
-    model: A target PyTorch model to save.
-    target_dir: A directory for saving the model to.
-    model_name: A filename for the saved model. Should include
+  Parameters:
+  - model: A target PyTorch model to save.
+  - target_dir: A directory for saving the model to.
+  - model_name: A filename for the saved model. Should include
       either ".pth" or ".pt" as the file extension.
 
-  Example usage:
-    save_model(model=model_0,
-               target_dir="models",
-               model_name="05_going_modular_tingvgg_model.pth")
+ 
   """
   # Create target directory
   target_dir_path = Path(target_dir)

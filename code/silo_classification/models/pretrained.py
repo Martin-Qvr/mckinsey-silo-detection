@@ -1,4 +1,6 @@
-
+"""
+Contained pretrained EffnetModel
+"""
 import torchvision
 from torch import nn
 

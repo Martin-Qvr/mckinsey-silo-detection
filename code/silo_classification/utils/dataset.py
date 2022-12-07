@@ -7,6 +7,16 @@ from typing import Tuple, Dict, List
 
 
 class SilosImage(Dataset):
+  """
+    Pytorch dataset for silos images
+
+    Parameters:
+    - image_path (Path): path to the image folders
+    - label_path (Path): path to the csv containing label class and split of the data
+    - val (bool): if true creates validation dataset according to `label_path`
+    - transform (torchvision.transform): transformation to the dataset
+
+  """
   
   def __init__(self, img_path, label_path=None, val=False, transform=None):
 

@@ -19,6 +19,18 @@ def train_step(model,
                loss_fn,
                optimizer,
                device,):
+
+"""
+  Trains a PyTorch model for a single epoch.
+
+  Parameters:
+  - model: A PyTorch model to be trained.
+  - dataloader: A DataLoader instance for the model to be trained on.
+  - loss_fn: A PyTorch loss function to minimize.
+  - optimizer: A PyTorch optimizer to help minimize the loss function.
+  - device: A target device to compute on (e.g. "cuda" or "cpu").
+
+  """
   
   model.train()
 
@@ -54,6 +66,18 @@ def test_step(model,
                dataloader,
               loss_fn,
               device):
+
+"""
+  Test a PyTorch model after a training epoch.
+
+  Parameters:
+  - model: A PyTorch model to be trained.
+  - dataloader: A DataLoader instance for the model to be trained on.
+  - loss_fn: A PyTorch loss function to minimize.
+  - device: A target device to compute on (e.g. "cuda" or "cpu").
+
+  """
+  
   model.eval()
 
   epoch_loss = 0
@@ -86,6 +110,19 @@ def train(model,
           epochs=EPOCHS,
           device=device,
 ):
+  """
+    Trains and tests a PyTorch model.
+
+
+    Parameters:
+    - model: A PyTorch model to be trained and tested.
+    - train_dataloader: A DataLoader instance for the model to be trained on.
+    - test_dataloader: A DataLoader instance for the model to be tested on.
+    - optimizer: A PyTorch optimizer to help minimize the loss function.
+    - loss_fn: A PyTorch loss function to calculate loss on both datasets.
+    - epochs: An integer indicating how many epochs to train for.
+    - device: A target device to compute on (e.g. "cuda" or "cpu").
+  """
   
   train_loss_ls = []
   test_loss_ls = []

@@ -12,6 +12,17 @@ data_transform = transforms.Compose([
     transforms.ToTensor() # this also converts all pixel values from 0 to 255 to be between 0.0 and 1.0 
 ])
 def inference(model, test_path, targ_path,  device=device, data_transform=data_transform, ):
+  """
+    Run inference of data on model and save result to csv.
+
+    Parameters:
+    - model (nn.module): pytorch model
+    - test_path (str): path to test data
+    - targ_path (str): path to the target csv file
+    - device (str): device for model and data
+    - transform (torchvision.transform): transform to be applied to data, should be 
+      same as the one used at train time
+  """
   # Create test dataset
   test_dataset = SilosImage(test_path, val=False, transform=data_transform)
 

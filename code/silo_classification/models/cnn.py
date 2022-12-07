@@ -1,3 +1,6 @@
+"""
+Contains AlexNet inspired CNN model
+"""
 from torch import nn
 class CNNModel(nn.Module):
   def __init__(self):
