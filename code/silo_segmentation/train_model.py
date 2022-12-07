@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 
 from utils.dataset_utils import SegmentationDataset
 from utils.train_utils import train_fn, eval_fn
-from utils.plot_utils import show_image
+from utils.plot_utils import show_image, dice_coef
 
 from models.model_backboned import SegmentationModel
 from models.own_model import build_unet
@@ -89,30 +89,53 @@ def train_model(test_size: float, model_name: str):
             print(f"Epoch : {i+1} Train Loss : {train_loss} Valid Loss : {valid_loss}")
 
 
-def make_predictions(idx):
-    """ 
-    This function is used to make predictions on one image and display :
-    - the original image
-    - the ground truth mask
-    - the predicted mask
-    """
-    df = pd.read_csv("../ai_ready/x-ai_data.csv")
-    df = df.loc[df["class"] == 1]
-    df.reset_index(inplace=True, drop=True)
-
-    ## Load the train and validation dataset
-
-    train_df, valid_df = train_test_split(df, test_size = 0.2, random_state=42)
-
-    trainset = SegmentationDataset(train_df)
-    validset = SegmentationDataset(valid_df)
-
+def plot_performance(idx, df):
     model =SegmentationModel()
-    model.load_state_dict(torch.load('/content/drive/MyDrive/mckinsey_musketeers/image_segmentation/second_model.pt'))
-    image, mask = validset[idx]
+    model.load_state_dict(torch.load('saved_models/second_model.pt'))
+
+    df.loc[:, 'images'] = 'images/' + df.loc[:, 'filename']
+    df.loc[:, 'masks'] = 'masks/' + df.loc[:, 'filename']
+    df.reset_index(inplace=True, drop=True)
+    
+    testset = SegmentationDataset(df)
+
+    image, mask = testset[idx]
 
     logits_mask = model(image.to(DEVICE).unsqueeze(0)) #(c, h,w) --> (batch, channel, h, w)
     pred_mask = torch.sigmoid(logits_mask)
     pred_mask = (pred_mask > 0.5) * 1
 
-    show_image(image, mask, pred_mask.detach().cpu().squeeze(0))
+    mask = mask.to("cpu")
+    pred_mask =pred_mask.to("cpu")
+
+    mask = mask.type(torch.int64)
+    mask
+
+    dice= dice_coef(pred_mask, mask).numpy()
+
+    show_image(image, mask, pred_mask.detach().cpu().squeeze(0), round(dice, 2))
+
+    return dice_coef
+
+
+def make_predictions(idx, df):
+    """ 
+    This function is used to make predictions on a dataset of images 
+    """
+
+    model =SegmentationModel()
+    model.load_state_dict(torch.load('saved_models/second_model.pt'))
+
+    df.loc[:, 'images'] = 'images/' + df.loc[:, 'filename']
+    df.loc[:, 'masks'] = 'masks/' + df.loc[:, 'filename']
+    df.reset_index(inplace=True, drop=True)
+    testset = SegmentationDataset(df)
+
+    for i in df.index:
+        image, mask = testset[i]
+        logits_mask = model(image.to(DEVICE).unsqueeze(0)) #(c, h,w) --> (batch, channel, h, w)
+        pred_mask = torch.sigmoid(logits_mask)
+        pred_mask = (pred_mask > 0.5) * 1
+        plt.imshow(pred_mask.detach().cpu().squeeze(0).permute(1,2,0).squeeze(),cmap = 'gray')
+        plt.savefig(df.loc[i, "filename"])
+    
