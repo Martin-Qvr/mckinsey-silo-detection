@@ -1,9 +1,17 @@
 from torch.utils.data import Dataset
 from PIL import Image
 from typing import Tuple
+import cv2 
+import numpy as np 
+import torch
+
+DATA_DIR = "../ai_ready"
 
 
 class SegmentationDataset(Dataset):
+  """ 
+  This class is used 
+  """
   def __init__(self, df):
     self.df = df
             
