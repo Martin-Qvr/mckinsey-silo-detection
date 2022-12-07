@@ -17,4 +17,4 @@ We are performing two tasks on a dataset of c. 2000 satellite images:
 To install the required libraries run :
 `pip install -r requirements.txt`
 
-Finally, we built a webapp to present our results using streamlit
+Finally, we built a webapp to present our results using streamlit. 
